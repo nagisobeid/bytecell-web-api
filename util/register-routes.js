@@ -11,7 +11,7 @@ const registerRoutes = async router => {
         for ( const r of routes ) {
         //routes.forEach( route => {
     
-            const filePath = BASE_DIR + '\\' + r;
+            const filePath = BASE_DIR + '/' + r;
             let stats = fs.lstatSync(filePath);
     
             // If file, then register route
