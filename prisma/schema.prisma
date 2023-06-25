@@ -1,0 +1,109 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model Images {
+  UUID    String? @db.VarChar(Max)
+  TITLE   String? @db.NVarChar(255)
+  IMGNAME String? @db.NVarChar(255)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model log {
+  system    String?   @db.NVarChar(220)
+  bcid      Int?
+  message   String?   @db.NVarChar(Max)
+  uuid      String?   @db.NVarChar(Max)
+  timestamp DateTime? @default(now(), map: "DF_log_timestamp") @db.DateTime
+  method    String?   @db.NVarChar(Max)
+  status    Int?
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model Orders {
+  id             Int
+  variant_id     Int?
+  browser_ip     String?   @db.VarChar(100)
+  checkout_id    Int?
+  created_at     String?   @db.VarChar(250)
+  processed_at   String?   @db.VarChar(250)
+  subtotal_price String?   @db.VarChar(50)
+  total_price    String?   @db.VarChar(50)
+  order_number   Int?
+  time_stamp     DateTime? @default(now(), map: "DF_Orders_time_stamp") @db.DateTime
+
+  @@ignore
+}
+
+model Prods {
+  collection         String?   @db.NVarChar(50)
+  bmid               Int?
+  uuid               String?   @db.NVarChar(150)
+  color              String?   @db.NVarChar(50)
+  colorValue         String?   @db.NVarChar(50)
+  colorAvailable     Boolean?
+  href               String?   @db.NVarChar(Max)
+  storage            String?   @db.NVarChar(50)
+  storageAvailable   Boolean?
+  condition          String?   @db.NVarChar(50)
+  bmPrice            String?   @db.NVarChar(Max)
+  price              Float?    @db.Money
+  conditionAvailable Boolean?
+  specs              String?   @db.NVarChar(Max)
+  title              String?   @db.NVarChar(250)
+  id                 Int       @id(map: "PK__Prods__3213E83FCC7ED5FD") @default(autoincrement())
+  lastUpdate         DateTime? @db.DateTime
+  priceChanged       Int?
+  outOfStockCount    Int?
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model ProdsSyncStatus {
+  UUID     String?   @db.VarChar(Max)
+  INSHPFY  Int?
+  DATESYNC DateTime? @default(now(), map: "DF_ProdsSyncStatus_DATESYNC") @db.DateTime
+  SHPFYID  Int?
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model Reviews {
+  UUID         String?   @db.VarChar(Max)
+  FN           String?   @db.VarChar(50)
+  LN           String?   @db.VarChar(50)
+  DATEREVIEW   DateTime? @db.Date
+  DATEPURCHASE DateTime? @db.Date
+  RATE         String?   @db.VarChar(10)
+  COMMENT      String?   @db.VarChar(Max)
+  ID           Int       @default(autoincrement())
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model ShopifyChecksum {
+  ChkSum     Int
+  ID         Int
+  LastUpdate DateTime? @default(now(), map: "DF_ShopifyChecksum_LastUpdate") @db.DateTime
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model VariantKey {
+  SHPFY_ID    String @db.VarChar(50)
+  BYTECELL_ID String @db.VarChar(50)
+
+  @@ignore
+}
