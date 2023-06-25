@@ -4,7 +4,7 @@ const registerRoutes = async router => {
 
     //return new Promise( async ( resolve, reject ) => {
 
-        const BASE_DIR = process.cwd() + '\\routes';
+        const BASE_DIR = process.cwd() + '/routes';
 
         let routes = fs.readdirSync( BASE_DIR );
         
